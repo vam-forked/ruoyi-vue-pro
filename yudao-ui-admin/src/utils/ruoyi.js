@@ -186,6 +186,19 @@ export function getTenantEnable() {
 }
 
 /**
+ * 获得验证码功能是否开启
+ */
+export function getCaptchaEnable() {
+  if (process.env.VUE_APP_CAPTCHA_ENABLE === "true") {
+    return true;
+  }
+  if (process.env.VUE_APP_CAPTCHA_ENABLE === "false") {
+    return false;
+  }
+  return process.env.VUE_APP_CAPTCHA_ENABLE || true;
+}
+
+/**
  * 获得文档是否开启
  */
 export function getDocEnable() {
@@ -196,4 +209,43 @@ export function getDocEnable() {
     return false;
   }
   return process.env.VUE_APP_DOC_ENABLE || false;
+}
+
+/**
+ * 获得 Vue 应用的基础路径
+ */
+export function getBasePath() {
+  return process.env.VUE_APP_APP_NAME || '/';
+}
+
+/**
+ * 获得 Vue 应用的访问路径
+ *
+ * @param path 路径
+ */
+export function getPath(path) {
+  // 基础路径，必须以 / 结尾
+  let basePath = getBasePath();
+  if (!basePath.endsWith('/')) {
+    return basePath + '/';
+  }
+  // 访问路径，必须不能以 / 开头
+  if (path.startsWith('/')) {
+    path = path.substring(1);
+  }
+  return basePath + path;
+}
+
+/**
+ * 除法保留两位小数
+ *
+ * @param {*} divisor 除数
+ * @param {*} dividend 被除数
+ * @returns
+ */
+ export function divide(divisor, dividend) {
+  if(divisor == null || dividend == null || dividend == 0){
+    return null;
+  }
+  return Math.floor(divisor/dividend*100)/100;
 }

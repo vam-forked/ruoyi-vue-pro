@@ -1,6 +1,9 @@
 <template>
   <div class="app-container">
-    <!-- 搜索工作栏 -->
+    <doc-alert title="定时任务" url="https://doc.iocoder.cn/job/" />
+    <doc-alert title="异步任务" url="https://doc.iocoder.cn/async-task/" />
+    <doc-alert title="消息队列" url="https://doc.iocoder.cn/message-queue/" />
+    <!-- 搜索栏 -->
     <el-form :model="queryParams" ref="queryForm" size="small" :inline="true" v-show="showSearch" label-width="120px">
       <el-form-item label="处理器的名字" prop="handlerName">
         <el-input v-model="queryParams.handlerName" placeholder="请输入处理器的名字" clearable @keyup.enter.native="handleQuery"/>
@@ -74,7 +77,7 @@
             <el-form-item label="处理器的参数：">{{ form.handlerParam }}</el-form-item>
             <el-form-item label="第几次执行：">{{ form.executeIndex }}</el-form-item>
             <el-form-item label="执行时间：">{{ parseTime(form.beginTime) + ' ~ ' + parseTime(form.endTime) }}</el-form-item>
-            <el-form-item label="执行时长：">{{ parseTime(form.duration) + ' 毫秒' }}</el-form-item>
+            <el-form-item label="执行时长：">{{ form.duration + ' 毫秒' }}</el-form-item>
             <el-form-item label="任务状态：">
               <dict-tag :type="DICT_TYPE.INFRA_JOB_LOG_STATUS" :value="form.status" />
             </el-form-item>
